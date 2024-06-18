@@ -5,7 +5,7 @@ services:
   router01:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: router-01
     command: mongos --port 27017 --configdb rs-config-server/configsvr01:27017,configsvr02:27017,configsvr03:27017 --bind_ip_all --keyFile /data/mongodb-keyfile
     ports:
@@ -18,7 +18,7 @@ services:
   router02:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: router-02
     command: mongos --port 27017 --configdb rs-config-server/configsvr01:27017,configsvr02:27017,configsvr03:27017 --bind_ip_all --keyFile /data/mongodb-keyfile
     volumes:
@@ -35,7 +35,7 @@ services:
   configsvr01:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: mongo-config-01 
     command: mongod --port 27017 --configsvr --replSet rs-config-server --keyFile /data/mongodb-keyfile
     volumes:
@@ -54,7 +54,7 @@ services:
   configsvr02:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: mongo-config-02 
     command: mongod --port 27017 --configsvr --replSet rs-config-server --keyFile /data/mongodb-keyfile
     volumes:
@@ -67,7 +67,7 @@ services:
   configsvr03:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: mongo-config-03 
     command: mongod --port 27017 --configsvr --replSet rs-config-server --keyFile /data/mongodb-keyfile
     volumes:
@@ -85,7 +85,7 @@ services:
   shard01-a:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2 
+    image: kay-mongo:4 
     container_name: shard-01-node-a
     command: mongod --port 27017 --shardsvr --replSet rs-shard-01 --keyFile /data/mongodb-keyfile
     volumes:
@@ -101,7 +101,7 @@ services:
   shard01-b:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: shard-01-node-b
     command: mongod --port 27017 --shardsvr --replSet rs-shard-01 --keyFile /data/mongodb-keyfile
     volumes:
@@ -114,7 +114,7 @@ services:
   shard01-c:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: shard-01-node-c
     command: mongod --port 27017 --shardsvr --replSet rs-shard-01 --keyFile /data/mongodb-keyfile
     volumes:
@@ -129,7 +129,7 @@ services:
   shard02-a:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: shard-02-node-a
     command: mongod --port 27017 --shardsvr --replSet rs-shard-02 --keyFile /data/mongodb-keyfile
     volumes:
@@ -145,7 +145,7 @@ services:
   shard02-b:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: shard-02-node-b
     command: mongod --port 27017 --shardsvr --replSet rs-shard-02 --keyFile /data/mongodb-keyfile
     volumes:
@@ -158,7 +158,7 @@ services:
   shard02-c:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: shard-02-node-c
     command: mongod --port 27017 --shardsvr --replSet rs-shard-02 --keyFile /data/mongodb-keyfile
     volumes:
@@ -173,7 +173,7 @@ services:
   shard03-a:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: shard-03-node-a
     command: mongod --port 27017 --shardsvr --replSet rs-shard-03 --keyFile /data/mongodb-keyfile
     volumes:
@@ -189,7 +189,7 @@ services:
   shard03-b:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: shard-03-node-b
     command: mongod --port 27017 --shardsvr --replSet rs-shard-03 --keyFile /data/mongodb-keyfile
     volumes:
@@ -202,7 +202,7 @@ services:
   shard03-c:
     build: 
       context: mongodb-build
-    image: jin-mongo:6.0.2
+    image: kay-mongo:4
     container_name: shard-03-node-c
     command: mongod --port 27017 --shardsvr --replSet rs-shard-03 --keyFile /data/mongodb-keyfile
     volumes:

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mongosh <<EOF
+mongo <<EOF
 var config = {
 	"_id": "rs-config-server",
 	"configsvr": true,

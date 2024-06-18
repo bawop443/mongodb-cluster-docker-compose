@@ -1,5 +1,5 @@
 #!/bin/bash
 
-mongosh <<EOF
+mongo <<EOF
 
 EOF
