@@ -1,7 +1,7 @@
 #!/bin/bash
 
-mongosh <<EOF
+mongo <<EOF
 use admin;
-db.createUser({user: "your_admin", pwd: "your_password", roles:[{role: "root", db: "admin"}]});
+db.createUser({user: "adminsmart", pwd: "password", roles:[{role: "root", db: "admin"}]});
 exit;
 EOF
