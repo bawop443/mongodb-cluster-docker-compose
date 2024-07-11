@@ -5,7 +5,7 @@ services:
       context: mongodb-build
     image: kay-mongo:4
     container_name: shard-02-primary
-    command: mongod --port 27017 --shardsvr --replSet rs-shard-02 --keyFile /data/mongodb-keyfile
+    command: mongod --port 27017 --shardsvr --replSet rs-shard-02
     volumes:
       - ./scripts:/scripts
       - mongodb_cluster_shard_02_primary_db:/data/db
@@ -20,7 +20,7 @@ services:
       context: mongodb-build
     image: kay-mongo:4
     container_name: shard-02-secondary-01
-    command: mongod --port 27017 --shardsvr --replSet rs-shard-02 --keyFile /data/mongodb-keyfile
+    command: mongod --port 27017 --shardsvr --replSet rs-shard-02
     volumes:
       - ./scripts:/scripts
       - mongodb_cluster_shard_02_secondary_01_db:/data/db
@@ -35,7 +35,7 @@ services:
       context: mongodb-build
     image: kay-mongo:4
     container_name: shard-02-secondary-02
-    command: mongod --port 27017 --shardsvr --replSet rs-shard-02 --keyFile /data/mongodb-keyfile
+    command: mongod --port 27017 --shardsvr --replSet rs-shard-02
     volumes:
       - ./scripts:/scripts
       - mongodb_cluster_shard_02_secondary_02_db:/data/db
