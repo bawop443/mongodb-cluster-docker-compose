@@ -1,0 +1,157 @@
+services:
+
+## Router
+  router01:
+    build: 
+      context: mongodb-build
+    image: kay-mongo:4
+    container_name: router-01
+    command: mongos --port 27017 --configdb rs-config-server/configsvr01:27017,configsvr02:27017,configsvr03:27017 --bind_ip_all --keyFile /data/mongodb-keyfile
+    ports:
+      - 27117:27017
+    restart: always
+    volumes:
+      - ./scripts:/scripts
+      - mongodb_cluster_router01_db:/data/db
+      - mongodb_cluster_router01_config:/data/configdb
+    networks:
+      - shard-01
+  router02:
+    build: 
+      context: mongodb-build
+    image: kay-mongo:4
+    container_name: router-02
+    command: mongos --port 27017 --configdb rs-config-server/configsvr01:27017,configsvr02:27017,configsvr03:27017 --bind_ip_all --keyFile /data/mongodb-keyfile
+    volumes:
+      - ./scripts:/scripts
+      - mongodb_cluster_router02_db:/data/db
+      - mongodb_cluster_router02_config:/data/configdb
+    ports:
+      - 27118:27017
+    restart: always
+    networks:
+      - shard-01
+
+## Config Servers
+  configsvr01:
+    build: 
+      context: mongodb-build
+    image: kay-mongo:4
+    container_name: mongo-config-01 
+    command: mongod --port 27017 --configsvr --replSet rs-config-server --keyFile /data/mongodb-keyfile
+    volumes:
+      - ./scripts:/scripts 
+      - mongodb_cluster_configsvr01_db:/data/db
+      - mongodb_cluster_configsvr01_config:/data/configdb
+    ports:
+      - 27119:27017
+    restart: always
+    links:
+      - shard02-a
+    networks:
+      - shard-01
+  configsvr02:
+    build: 
+      context: mongodb-build
+    image: kay-mongo:4
+    container_name: mongo-config-02 
+    command: mongod --port 27017 --configsvr --replSet rs-config-server --keyFile /data/mongodb-keyfile
+    volumes:
+      - ./scripts:/scripts
+      - mongodb_cluster_configsvr02_db:/data/db
+      - mongodb_cluster_configsvr02_config:/data/configdb
+    ports:
+      - 27120:27017
+    restart: always
+    networks:
+      - shard-01
+  configsvr03:
+    build: 
+      context: mongodb-build
+    image: kay-mongo:4
+    container_name: mongo-config-03 
+    command: mongod --port 27017 --configsvr --replSet rs-config-server --keyFile /data/mongodb-keyfile
+    volumes:
+      - ./scripts:/scripts
+      - mongodb_cluster_configsvr03_db:/data/db
+      - mongodb_cluster_configsvr03_config:/data/configdb
+    ports:
+      - 27121:27017
+    restart: always
+    networks:
+      - shard-01
+
+## Shards
+  shard01-primary:
+    build: 
+      context: mongodb-build
+    image: kay-mongo:4 
+    container_name: shard01-primary
+    command: mongod --port 27017 --shardsvr --replSet rs-shard-01 --keyFile /data/mongodb-keyfile
+    volumes:
+      - ./scripts:/scripts
+      - mongodb_cluster_shard01_primary_db:/data/db
+      - mongodb_cluster_shard01_primary_config:/data/configdb
+    ports:
+      - 27122:27017
+    restart: always
+    networks:
+      - shard-01
+  shard01-secondary-01:
+    build: 
+      context: mongodb-build
+    image: kay-mongo:4
+    container_name: shard01-secondary-01
+    command: mongod --port 27017 --shardsvr --replSet rs-shard-01 --keyFile /data/mongodb-keyfile
+    volumes:
+      - ./scripts:/scripts
+      - mongodb_cluster_shard01_secondary_01_db:/data/db
+      - mongodb_cluster_shard01_secondary_01_config:/data/configdb
+    ports:
+      - 27123:27017
+    restart: always
+    networks:
+      - shard-01
+  shard01-secondary-02:
+    build: 
+      context: mongodb-build
+    image: kay-mongo:4
+    container_name: shard01-secondary-02
+    command: mongod --port 27017 --shardsvr --replSet rs-shard-01 --keyFile /data/mongodb-keyfile
+    volumes:
+      - ./scripts:/scripts
+      - mongodb_cluster_shard01_secondary_02_db:/data/db
+      - mongodb_cluster_shard01_secondary_02_config:/data/configdb
+    ports:
+      - 27124:27017
+    restart: always
+    networks:
+      - shard-01
+
+networks:
+  shard-01:
+
+volumes:
+  mongodb_cluster_router01_db:
+  mongodb_cluster_router01_config:
+  
+  mongodb_cluster_router02_db:
+  mongodb_cluster_router02_config:
+  
+  mongodb_cluster_configsvr01_db:
+  mongodb_cluster_configsvr01_config:
+  
+  mongodb_cluster_configsvr02_db:
+  mongodb_cluster_configsvr02_config:
+  
+  mongodb_cluster_configsvr03_db:
+  mongodb_cluster_configsvr03_config:
+  
+  mongodb_cluster_shard01_primary_db:
+  mongodb_cluster_shard01_primary_config:
+  
+  mongodb_cluster_shard01_secondary_01_db:
+  mongodb_cluster_shard01_secondary_01_config:
+  
+  mongodb_cluster_shard01_secondary_02_db:
+  mongodb_cluster_shard01_secondary_02_config:
