@@ -31,8 +31,6 @@ services:
     command: mongod --port 27017 --configsvr --replSet rs-config-server --bind_ip_all
     volumes:
       - ./scripts:/scripts 
-      - mongodb_cluster_configsvr_01_db:/data/db
-      - mongodb_cluster_configsvr_01_config:/data/configdb
     ports:
       - 27119:27017
     restart: always
