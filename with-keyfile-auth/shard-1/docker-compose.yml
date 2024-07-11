@@ -38,7 +38,7 @@ services:
       context: mongodb-build
     image: kay-mongo:4
     container_name: configsvr-01
-    command: mongod --port 27017 --configsvr --replSet rs-config-server 
+    command: mongod --port 27017 --configsvr --replSet rs-config-server --bind_ip_all
     volumes:
       - ./scripts:/scripts 
       - mongodb_cluster_configsvr_01_db:/data/db
@@ -53,7 +53,7 @@ services:
       context: mongodb-build
     image: kay-mongo:4
     container_name: configsvr-02
-    command: mongod --port 27017 --configsvr --replSet rs-config-server 
+    command: mongod --port 27017 --configsvr --replSet rs-config-server --bind_ip_all
     volumes:
       - ./scripts:/scripts
       - mongodb_cluster_configsvr_02_db:/data/db
@@ -68,7 +68,7 @@ services:
       context: mongodb-build
     image: kay-mongo:4
     container_name: configsvr-03
-    command: mongod --port 27017 --configsvr --replSet rs-config-server 
+    command: mongod --port 27017 --configsvr --replSet rs-config-server --bind_ip_all
     volumes:
       - ./scripts:/scripts
       - mongodb_cluster_configsvr_03_db:/data/db
@@ -85,7 +85,7 @@ services:
       context: mongodb-build
     image: kay-mongo:4 
     container_name: shard-01-primary
-    command: mongod --port 27017 --shardsvr --replSet rs-shard-01
+    command: mongod --port 27017 --shardsvr --replSet rs-shard-01 --bind_ip_all
     volumes:
       - ./scripts:/scripts
       - mongodb_cluster_shard_01_primary_db:/data/db
@@ -100,7 +100,7 @@ services:
       context: mongodb-build
     image: kay-mongo:4
     container_name: shard-01-secondary-01
-    command: mongod --port 27017 --shardsvr --replSet rs-shard-01
+    command: mongod --port 27017 --shardsvr --replSet rs-shard-01 --bind_ip_all
     volumes:
       - ./scripts:/scripts
       - mongodb_cluster_shard_01_secondary_01_db:/data/db
@@ -115,7 +115,7 @@ services:
       context: mongodb-build
     image: kay-mongo:4
     container_name: shard-01-secondary-02
-    command: mongod --port 27017 --shardsvr --replSet rs-shard-01
+    command: mongod --port 27017 --shardsvr --replSet rs-shard-01 --bind_ip_all
     volumes:
       - ./scripts:/scripts
       - mongodb_cluster_shard_01_secondary_02_db:/data/db
