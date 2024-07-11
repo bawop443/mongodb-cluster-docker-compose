@@ -7,17 +7,17 @@ var config = {
     "members": [
         {
             "_id": 0,
-            "host": "shard-02-primary:27017",
+            "host": "192.168.30.63:27125",
 			"priority": 1
         },
         {
             "_id": 1,
-            "host": "shard-02-secondary-01:27017",
+            "host": "192.168.30.63:27126",
 			"priority": 0.5
         },
         {
             "_id": 2,
-            "host": "shard-02-secondary-02:27017",
+            "host": "192.168.30.63:27127",
 			"priority": 0.5
         }
     ]
