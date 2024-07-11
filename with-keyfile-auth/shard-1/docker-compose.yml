@@ -37,7 +37,7 @@ services:
     build: 
       context: mongodb-build
     image: kay-mongo:4
-    container_name: mongo-config-01 
+    container_name: configsvr-01
     command: mongod --port 27017 --configsvr --replSet rs-config-server --keyFile /data/mongodb-keyfile
     volumes:
       - ./scripts:/scripts 
@@ -52,7 +52,7 @@ services:
     build: 
       context: mongodb-build
     image: kay-mongo:4
-    container_name: mongo-config-02 
+    container_name: configsvr-02
     command: mongod --port 27017 --configsvr --replSet rs-config-server --keyFile /data/mongodb-keyfile
     volumes:
       - ./scripts:/scripts
@@ -67,7 +67,7 @@ services:
     build: 
       context: mongodb-build
     image: kay-mongo:4
-    container_name: mongo-config-03 
+    container_name: configsvr-03
     command: mongod --port 27017 --configsvr --replSet rs-config-server --keyFile /data/mongodb-keyfile
     volumes:
       - ./scripts:/scripts
