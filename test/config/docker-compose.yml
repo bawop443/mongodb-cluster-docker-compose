@@ -1,0 +1,7 @@
+services:
+  configsvr:
+    image: mongo
+    container_name: mongo-config 
+    command: mongod --port 27017 --configsvr --replSet config --bind_ip_all
+    ports:
+      - 27010:27017
