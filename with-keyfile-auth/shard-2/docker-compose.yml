@@ -3,7 +3,7 @@ services:
   shard-02-primary:
     build: 
       context: mongodb-build
-    image: kay-mongo:4
+    image: mongo:4
     container_name: shard-02-primary
     command: mongod --port 27017 --shardsvr --replSet rs-shard-02 --bind_ip_all
     volumes:
@@ -13,12 +13,10 @@ services:
     ports:
       - 27125:27017
     restart: always
-    networks:
-      - shard-02
   shard-02-secondary-01:
     build: 
       context: mongodb-build
-    image: kay-mongo:4
+    image: mongo:4
     container_name: shard-02-secondary-01
     command: mongod --port 27017 --shardsvr --replSet rs-shard-02 --bind_ip_all
     volumes:
@@ -28,12 +26,10 @@ services:
     ports:
       - 27126:27017
     restart: always
-    networks:
-      - shard-02
   shard-02-secondary-02:
     build: 
       context: mongodb-build
-    image: kay-mongo:4
+    image: mongo:4
     container_name: shard-02-secondary-02
     command: mongod --port 27017 --shardsvr --replSet rs-shard-02 --bind_ip_all
     volumes:
@@ -43,11 +39,6 @@ services:
     ports:
       - 27127:27017
     restart: always
-    networks:
-      - shard-02
-
-networks:
-  shard-02:
 
 volumes:
   mongodb_cluster_shard_02_primary_db:
