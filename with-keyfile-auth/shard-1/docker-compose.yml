@@ -46,8 +46,6 @@ services:
     ports:
       - 27119:27017
     restart: always
-    links:
-      - shard02-a
     networks:
       - shard-01
   configsvr02:
