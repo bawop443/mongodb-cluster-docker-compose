@@ -5,7 +5,7 @@ services:
     build: 
       context: mongodb-build
     container_name: router
-    command: mongos --port 27017 --configdb rs-config-server/192.168.30.91:25100,192.168.30.92:25100,192.168.30.93:25100 --bind_ip_all --keyFile /data/mongodb-keyfile --wiredTigerCacheSizeGB 3
+    command: mongos --port 27017 --configdb rs-config-server/192.168.30.91:25100,192.168.30.92:25100,192.168.30.93:25100 --bind_ip_all --keyFile /data/mongodb-keyfile
     ports:
       - 25200:27017
     restart: always
